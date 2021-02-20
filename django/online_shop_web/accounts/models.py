@@ -1,6 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import (User, AbstractUser, BaseUserManager,
-                                        PermissionsMixin, Permission, Group)
+from django.contrib.auth.models import (AbstractUser, BaseUserManager,
+                                        PermissionsMixin, Permission)
 
 
 class CustomUserManager(BaseUserManager):

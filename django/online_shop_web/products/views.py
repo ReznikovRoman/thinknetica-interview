@@ -1,7 +1,5 @@
-from django.shortcuts import render
 from django.views import generic
-from django.urls import reverse, reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 from braces.views import GroupRequiredMixin
 
