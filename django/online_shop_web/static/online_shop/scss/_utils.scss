@@ -1,0 +1,14 @@
+@import "variables";
+
+.fa-star.checked {
+  color: $primary-color;
+}
+
+
+// Product Card
+.card.product {
+  .card-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+}
