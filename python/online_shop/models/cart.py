@@ -41,7 +41,8 @@ class Cart:
                     self._products.append(np)
                 else:
                     print("Error! product must be Product.")
-        print("Error! product must be Product.")
+        else:
+            print("Error! product must be Product.")
 
     @property
     def _price(self):
@@ -67,6 +68,14 @@ class Cart:
         else:
             print("Cart is empty.")
 
+    def print_products_with_indexes(self, _msg: str = None):
+        """Prints all products (name: price) and their indexes"""
+        if _msg is not None:
+            print(_msg)
+
+        for i, good in enumerate(self._products, 1):
+            print(f"{i} - {good.get_name()} ({good.get_price()})")
+
     def delete_product(self, product_to_delete: Product):
         """
         Removes a given Product from the Cart
@@ -84,6 +93,7 @@ class Cart:
                 print(f"Error! Product {product_to_delete.get_name()} is not in the Cart.")
         else:
             print("Error! product must be Product.")
+        print(f"Product {product_to_delete} has been removed from the Cart!")
 
     def clear(self):
         """Removes all Products from the Cart"""
