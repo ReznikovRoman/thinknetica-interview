@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+{% load accounts_extras %}
+
+{% block title %}
+    Product Detail
+{% endblock %}
+
+{% block content %}
+    <h1>Product Detail</h1>
+
+    <h2>{{ product.name }}: {{ product.price }}$</h2>
+    <a href="#" class="btn btn-lg btn-primary ml-0 mt-3">Add to cart</a>
+
+    {% if user|has_group:'managers' or user.is_superuser %}
+        <div class="manager-actions mt-5">
+            <a href="{% url 'products:product-edit' pk=product.pk %}" class="btn btn-lg btn-warning mr-3">Edit</a>
+            <a href="{% url 'products:product-remove' pk=product.pk %}" class="btn btn-lg btn-danger">Delete</a>
+        </div>
+    {% endif %}
+
+{% endblock %}
