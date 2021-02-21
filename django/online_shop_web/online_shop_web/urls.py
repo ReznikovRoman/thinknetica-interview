@@ -10,11 +10,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', views.index, name='home-page'),
+    path('checkout-success/', views.checkout_success, name='checkout-success'),
 
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('accounts/', include('django.contrib.auth.urls')),
 
     path('products/', include('products.urls', namespace='products')),
+
+    path('cart/', include('cart.urls', namespace='cart')),
 ]
 
 urlpatterns += (
