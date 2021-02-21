@@ -14,7 +14,7 @@ def index(request):
 
 
 def checkout_success(request):
-    return render(request, 'checkout_success.html')
+    return render(request, 'cart/checkout_success.html')
 
 
 def error_404_view(request, *args, **kwargs):
