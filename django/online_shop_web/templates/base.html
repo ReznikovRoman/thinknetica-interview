@@ -45,8 +45,12 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2 search-field" type="search" placeholder="Search for a product" aria-label="Search">
+            <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'products:products-search-results' %}"
+                  role="search" id="navbarSearchForm">
+                <div class="md-form my-2">
+                    <input class="form-control mr-sm-2 search-field" type="text" placeholder="Search for a product"
+                           aria-label="Search" name="q">
+                </div>
             </form>
             <div class="nav-links--right">
                 <ul class="navbar-nav mr-auto">
@@ -56,7 +60,9 @@
 
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Cart</a>
+                            <a class="nav-link" href="{% url 'cart:cart-detail' %}">
+                                <i class="fas fa-shopping-cart"></i> Cart
+                            </a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
