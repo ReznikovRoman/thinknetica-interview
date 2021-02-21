@@ -14,7 +14,7 @@ SECRET_KEY = '*i&vtpuuu6m3k9m+x$=t__s!dv&ws%zkxr)5z1hvup8#34!_x5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -31,6 +31,7 @@ INSTALLED_APPS = [
 
     'products.apps.ProductsConfig',
     'accounts.apps.AccountsConfig',
+    'cart.apps.CartConfig',
 ]
 
 MIDDLEWARE = [
@@ -41,6 +42,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'accounts.middleware.restrict_admin_page_middleware.RestrictStaffToAdminMiddleware',
 ]
 
 ROOT_URLCONF = 'online_shop_web.urls'
@@ -109,7 +112,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
