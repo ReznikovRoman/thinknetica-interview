@@ -5,11 +5,13 @@ from braces.views import GroupRequiredMixin
 
 from . import models
 from . import forms
+from .services import get_search_results
 
 
 class ShowProducts(generic.ListView):
     model = models.Product
     paginate_by = 6
+    ordering = 'id'
 
 
 class ShowProductPage(generic.DetailView):
@@ -38,8 +40,14 @@ class DeleteProduct(GroupRequiredMixin,
     success_url = reverse_lazy('products:product-list')
 
 
+class ProductSearchResults(generic.ListView):
+    model = models.Product
+    template_name = 'products/product_search_results.html'
+    context_object_name = 'product_list'
+    paginate_by = 6
 
-
+    def get_queryset(self):
+        return get_search_results(self.request.GET.get('q'))
 
 
 
