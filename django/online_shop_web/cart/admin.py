@@ -10,10 +10,9 @@ class CartAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super(CartAdmin, self).get_queryset(request)
-        qs = qs.annotate(
+        return qs.annotate(
             _total_price=models.Sum('products__price'),
         )
-        return qs
 
     def total_price(self, obj):
         return obj.total_price
