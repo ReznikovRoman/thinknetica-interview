@@ -52,3 +52,7 @@ h3 {
     margin-left: -3.5rem !important; }
   .navbar .nav-links--right {
     margin-left: auto !important; }
+
+.cart-total {
+  font-size: 120%;
+  font-weight: bold; }
