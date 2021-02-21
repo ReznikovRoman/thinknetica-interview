@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Cart
+{% endblock %}
+
+{% block content %}
+    <h1>Cart</h1>
+
+    {% if cart.products.all %}
+        {% for product in cart.products.all %}
+            <div>
+                <p>
+                    {{ forloop.counter }}.
+                    <a href="{% url 'products:product-detail' pk=product.pk %}">{{ product.name }}</a>: {{ product.price }}$
+                    <a href="{% url 'cart:product-remove' product_pk=product.pk %}"
+                       class="btn btn-small btn-danger ml-3">
+                        Remove
+                    </a>
+                </p>
+            </div>
+        {% endfor %}
+        <p class="cart-total">Total: {{ cart.total_price }}$</p>
+        <a href="{% url 'cart:order-checkout' %}" class="btn btn-primary">Proceed to checkout</a>
+    {% else %}
+        <h2>Cart is empty</h2>
+    {% endif %}
+{% endblock %}
