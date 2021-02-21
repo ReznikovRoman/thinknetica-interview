@@ -1,8 +1,20 @@
 from django.shortcuts import render
 
+from . import services
+
 
 def index(request):
-    return render(request, 'index.html')
+    return render(
+        request,
+        'index.html',
+        {
+            'latest_products': services.get_latest_products(),
+        }
+    )
+
+
+def checkout_success(request):
+    return render(request, 'checkout_success.html')
 
 
 def error_404_view(request, *args, **kwargs):
