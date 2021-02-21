@@ -1,33 +1,51 @@
 from django.db import models
 from django.contrib.auth.models import (AbstractUser, BaseUserManager,
-                                        PermissionsMixin, Permission)
+                                        PermissionsMixin, Permission, Group)
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password):
+    def create_user(self, email: str, password: str, first_name: str = ' ', last_name: str = ' '):
         if not email:
             raise ValueError("Users must have an email address!")
 
         user = self.model(
             email=self.normalize_email(email),
+            first_name=first_name,
+            last_name=last_name,
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_staffuser(self, email, password):
+    def create_staffuser(self, email: str, password: str, first_name: str, last_name: str):
         user = self.create_user(
             email=self.normalize_email(email),
             password=password,
         )
+        user.first_name = first_name
+        user.last_name = last_name
         user.is_staff = True
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password):
+    def create_manager(self, email: str, password: str, first_name: str, last_name: str):
         user = self.create_user(
             email=self.normalize_email(email),
             password=password,
+        )
+        user.first_name = first_name
+        user.last_name = last_name
+        user.is_staff = True
+        Group.objects.get(name='managers').user_set.add(user)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email: str, password: str, first_name: str, last_name: str):
+        user = self.create_user(
+            email=self.normalize_email(email),
+            password=password,
+            first_name=first_name,
+            last_name=last_name
         )
         user.is_admin = True
         user.is_staff = True
@@ -64,7 +82,7 @@ class CustomUser(AbstractUser, PermissionsMixin):
 
     # login parameter
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     objects = CustomUserManager()
 
